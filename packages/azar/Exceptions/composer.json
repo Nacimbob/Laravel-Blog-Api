@@ -1,0 +1,19 @@
+{
+    "name": "nacim/exceptions",
+    "description": "Laravel Exceptions ",
+    "keywords": ["laravel","Exceptions","json-api","laravel-package"],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "nacim",
+            "email": "fn_boubrit@esi.dz"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0"
+    },
+   "autoload": {
+        "psr-4": {"Azar\\Exceptions\\": "src/"}
+    }
+}
