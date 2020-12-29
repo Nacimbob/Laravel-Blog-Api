@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Blog\Http\Services\BloggerServiceInterface;
 use Azar\Jsonable\jsonableTrait;
+use Modules\Blog\Transformers\BloggerResource;
 
 class BloggerController extends Controller
 {
@@ -25,7 +26,7 @@ class BloggerController extends Controller
      */
     public function index()
     {
-        return view('blog::index');
+
     }
 
     /**
@@ -36,7 +37,7 @@ class BloggerController extends Controller
     public function store(Request $request)
     {
         //
-        return $this->created("Blogger created successfully",$this->bloggerService->create($request->all()));
+        return $this->created("Blogger created successfully",new BloggerResource($this->bloggerService->create($request->all())));
     }
 
     /**
@@ -46,17 +47,7 @@ class BloggerController extends Controller
      */
     public function show($id)
     {
-        return view('blog::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('blog::edit');
+        return $this->ok("blogger readed successfully",new BloggerResource($this->bloggerService->read($id)));
     }
 
     /**
@@ -67,7 +58,7 @@ class BloggerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       return $this->ok("blogger updated successfully",new BloggerResource($this->bloggerService->update($id,$request->all())));
     }
 
     /**
@@ -77,6 +68,7 @@ class BloggerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->bloggerService->delete($id);
+        return $this->noContent();
     }
 }

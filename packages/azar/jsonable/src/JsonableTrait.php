@@ -47,9 +47,9 @@ trait jsonableTrait {
          *
          * @return Illuminate\Http\JsonResponse
          */
-        protected function noContent(string $message) : JsonResponse
+        protected function noContent() : JsonResponse
         {
-            return response()->json($this->body($message), 204);
+            return response()->json(204);
         }
 
         /**
@@ -142,9 +142,7 @@ trait jsonableTrait {
         protected function body(string $message, $data = null){
 
             if ($data) {
-
                 return  array('message' => $message,"data" => $data );
-
             }
 
             return  array('message' => $message);

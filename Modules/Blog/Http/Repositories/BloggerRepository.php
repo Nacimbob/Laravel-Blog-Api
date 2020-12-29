@@ -11,10 +11,8 @@ use Illuminate\Support\Facades\Hash;
 class BloggerRepository implements BloggerRepositoryInterface {
 
     public function create(array $attributes){
-        DB::beginTransaction();
-
-        try {
-            $user= User::forceCreate([
+        return DB::transaction(function () use($attributes) {
+            $user= User::Create([
                 'name' =>  $attributes['name'],
                 'email' =>  $attributes['email'],
                 'password' => Hash::make($attributes['password']),
@@ -24,18 +22,13 @@ class BloggerRepository implements BloggerRepositoryInterface {
             $blogger->user_id=$user->id;
             $blogger->save();
             return $blogger;
-            DB::commit();
-        } catch (\Throwable $e) {
-            DB::rollback();
-            throw $e;
-        }
+        });
+
 
     }
 
     public function update(Blogger $blogger,array $parameters){
         if ($blogger) {
-            $user= User::find($blogger->user_id);
-            $user->update($parameters);
             $blogger->update($parameters);
             return $blogger;
         }
@@ -44,11 +37,11 @@ class BloggerRepository implements BloggerRepositoryInterface {
     }
 
     public function delete(Blogger $blogger){
-       return User::delete($blogger->id);
+       return User::destroy($blogger->user_id);
     }
 
     public function findById($id){
-        return Blogger::find($id)->first();
+        return Blogger::find($id);
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use Modules\Blog\Http\Controllers\BloggerController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +18,6 @@ Route::middleware('auth:api')->get('/blog', function (Request $request) {
     return $request->user();
 });
 
-Route::post('bloggers',[BloggerController::class,'store']);
+Route::group(['prefix' => 'blog'], function () {
+    Route::resource('bloggers', 'BloggerController')->except(['create','edit']);
+});

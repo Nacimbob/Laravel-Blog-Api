@@ -17,9 +17,9 @@ class CreateTableBloggers extends Migration
             $table->id();
             $table->string('pseudo',50);
             $table->string('description',250);
-            $table->string('profile',250);
+            $table->string('profile',250)->nullable();
             $table->unsignedBigInteger('user_id')->unique();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

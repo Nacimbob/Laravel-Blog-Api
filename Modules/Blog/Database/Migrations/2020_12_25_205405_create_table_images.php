@@ -18,7 +18,7 @@ class CreateTableImages extends Migration
             $table->string('name',150)->unique();
             $table->string('description',250);
             $table->unsignedBigInteger('article_id');
-            $table->foreign('article_id')->references('id')->on('articles');
+            $table->foreign('article_id')->references('id')->on('articles')->cascadeOnDelete();
             $table->timestamps();
         });
     }

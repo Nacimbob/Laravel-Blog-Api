@@ -21,7 +21,7 @@ class CreateTableArticles extends Migration
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('blog_id');
             $table->foreign('article_id')->references('id')->on('articles');
-            $table->foreign('blog_id')->references('id')->on('blogs');
+            $table->foreign('blog_id')->references('id')->on('blogs')->cascadeOnDelete();
             $table->timestamps();
         });
     }

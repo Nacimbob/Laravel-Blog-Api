@@ -21,7 +21,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
            $user = User::where('email', $request->email)->first();
-           return $this->ok("access successfull, welcome back".$user->name,["token"=>$user->api_token]);
+           return $this->ok("access successfull, welcome back ".$user->name,["token"=>$user->api_token]);
         }
 
         return $this->unauthorized("Credentials provided doesnt exists");

@@ -18,7 +18,7 @@ class CreateTableBlogs extends Migration
             $table->string('title',100);
             $table->text('description');
             $table->unsignedBigInteger('blogger_id');
-            $table->foreign('blogger_id')->references('id')->on('bloggers');
+            $table->foreign('blogger_id')->references('id')->on('bloggers')->cascadeOnDelete();
             $table->unique(array('blogger_id','title'));
             $table->timestamps();
         });
