@@ -5,6 +5,8 @@ use Modules\Blog\Entities\Blogger;
 
 interface BloggerRepositoryInterface {
 
+    public function all();
+
     public function create(array $attributes);
 
     public function update(Blogger $blogger,array $parameters);

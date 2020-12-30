@@ -26,7 +26,7 @@ class BloggerController extends Controller
      */
     public function index()
     {
-
+         return $this->ok("list of bloggers",BloggerResource::Collection($this->bloggerService->all()));
     }
 
     /**
@@ -36,7 +36,6 @@ class BloggerController extends Controller
      */
     public function store(Request $request)
     {
-        //
         return $this->created("Blogger created successfully",new BloggerResource($this->bloggerService->create($request->all())));
     }
 

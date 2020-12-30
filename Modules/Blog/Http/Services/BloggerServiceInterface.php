@@ -4,6 +4,8 @@ namespace Modules\Blog\Http\Services;
 
 interface BloggerServiceInterface {
 
+    public function all();
+
     public function create(array $parameters);
 
     public function update($blogger_id,array $parameters);

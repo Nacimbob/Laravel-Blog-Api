@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Hash;
 
 class BloggerRepository implements BloggerRepositoryInterface {
 
+    public function all(){
+        return Blogger::all();
+    }
+
     public function create(array $attributes){
         return DB::transaction(function () use($attributes) {
             $user= User::Create([

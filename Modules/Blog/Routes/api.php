@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/blog', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'blog'], function () {
+Route::group(['prefix' => 'blog','middleware'=>'admin'], function () {
     Route::resource('bloggers', 'BloggerController')->except(['create','edit']);
 });

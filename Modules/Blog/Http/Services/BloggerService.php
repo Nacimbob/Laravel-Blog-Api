@@ -14,6 +14,10 @@ class BloggerService implements BloggerServiceInterface {
         $this->bloggerRepo=$blogger;
     }
 
+    public function all(){
+       return $this->bloggerRepo->all();
+    }
+
     public function create(array $parameters){
        return $this->bloggerRepo->create($parameters);
     }
